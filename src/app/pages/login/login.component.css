@@ -1,0 +1,14 @@
+.full-width{
+    width: 100%;
+}
+
+.registraion-form{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+
+.error {
+    font-size: 10px;
+    color: red;
+  }

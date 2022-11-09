@@ -1,0 +1,36 @@
+<!-- <p>nav-bar works!</p> -->
+<mat-toolbar color="primary">
+    <a
+    *ngIf="isLoggedIn"
+    style="margin-right: 50px;" mat-icon-button>
+        <mat-icon>home</mat-icon> Home
+    </a>
+
+    <span class="example-spacer"></span>
+
+    <span class="text-center" >Welcome to YashTalks!!!</span>
+
+    <span class="example-spacer"></span>
+
+    <a 
+    *ngIf="!isLoggedIn"
+    routerLink="/login" 
+    style="margin-right: 50px;" mat-icon-button>
+        <mat-icon>login</mat-icon> Login
+    </a>
+
+    <a 
+    *ngIf="!isLoggedIn"
+    routerLink="/signup"
+    style="margin-right: 50px;" mat-icon-button>
+        <mat-icon>app_registration</mat-icon> Register
+    </a>
+
+    <a 
+    *ngIf="isLoggedIn"
+    (click)="logout()"
+    routerLink="/" 
+    style="margin-right: 50px;" mat-icon-button>
+        <mat-icon>logout</mat-icon> Logout
+    </a>
+</mat-toolbar>
