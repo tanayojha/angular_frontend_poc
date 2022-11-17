@@ -1,17 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import baseURL from './helper';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    @Inject(SESSION_STORAGE) private storage: StorageService) { }
 
   //get Current User which is logged in
   public getCurrentUser(){
     return this.http.get(`${baseURL}/current-user`);
+  }
+
+  setJwtToken(token: string) {
+    this.storage.set("token", token);
+    console.log(token);
+    
+  }
+
+  getJwtToken() {
+    return this.storage.get("token");
+    
   }
 
   //genrate token
@@ -21,13 +34,19 @@ export class LoginService {
 
   //set token in local storgae for logged in user
   public loggedInUser(token: any){
-      localStorage.setItem('token',token);
+    console.log("insided  loggedInUser",token);
+    this.storage.set;
+      //localStorage.setItem('token',token);
+      console.log("insided  loggedInUser",localStorage.getItem('token'));
+
       return true;
   }
 
   //check user is Login in or not
   public isLoggedIn(){
       let geneartedToken = localStorage.getItem("token");
+      console.log("insided  isloggedin",geneartedToken);
+      
       if(geneartedToken==undefined || geneartedToken=='' || geneartedToken== null){
           return false;
       }else{
@@ -37,7 +56,7 @@ export class LoginService {
 
   //logout : remove token from local storage
   public logout(){
-      localStorage.removeItem('token'); 
+      // localStorage.setItem('token',''); 
       localStorage.removeItem('user');
       return true;
   }
@@ -48,8 +67,9 @@ export class LoginService {
   }
 
   //set userDetails
-  public setUser(user : any){
-    localStorage.setItem('user', JSON.stringify(user));
+  public setUser(user : string){
+    console.log("inside setuser"+user);
+    localStorage.setItem('user', user);
   }
 
   //get user

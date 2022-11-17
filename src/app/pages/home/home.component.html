@@ -1,528 +1,243 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<app-nav-bar [isLoggedIn]="isLoggedIn"></app-nav-bar>
 
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: rgb(69, 69, 69)#333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+<div class="container p-2">
+  <div class="row">
+    <div class="col-md-12 border border-primary">
+      <div class="feed p-2">
+        <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+          <span></span>
+          <div class="col-md-6">
+            <div class="d-flex form-inputs">
+              <input class="form-control" type="text" placeholder="Search any product...">
+              <button mat-button color="primary" ><mat-icon>search</mat-icon></button>
+            </div>
+          </div>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 border border-primary">
+      <!-- Edit Profile Section -->
+      <div class="edit-profile">
+        <div class="feed p-2">
+          <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+            <div class="feed-text px-2">
+              <div class="miniBadge clearfix">
+                <a style="position:relative;" href="">
+                  <div class="user_image">
+                    <img class="center" src="../../../assets/userimg.png" alt="no image found" width="60px"
+                      height="60px">
+                  </div>
+                </a>
+                <div *ngIf="user" class="full_name" style="color: #673ab7; margin-top: 5px;">{{user.firstName}} {{ user.lastName}} </div>
+                <div class="member_title ">Software Engineer</div>
+                <div class="edit-profile-link">
+                  <a>Edit Profile</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 border border-primary">
+      
+      <div class="feed p-2">
+        <!-- Create Post Section -->
+        <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+          <div class="feed-text px-2">
+            <!-- <h6 class="text-black-50 mt-2">What's on your mind</h6> -->
+            <div class="form-group shadow-textarea">
+                <!-- <label for="exampleFormControlTextarea6">Shadow and placeholder</label> -->
+              <textarea [(ngModel)]= "post.content" class="form-control z-depth-1"  rows="3" name="content" placeholder="Share an update with everyone in the YASh Technologies..."></textarea>
+              <!-- <form [formGroup]="postfg">
+              </form> -->
+            </div>
+            <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+              <span></span>
+              <div class="float-sm-right"><button type="button" class="btn" (click)="addPost(post)"> Share </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FEEDS -->
+        <div  class="bg-white border mt-2">
+          <div >
+            <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+              <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle"
+                  src="https://i.imgur.com/aoKusnD.jpg" width="45">
+                <div class="d-flex flex-column flex-wrap ml-2" style="padding-left: 10px;">
+                  <span class="font-weight-bold">{{post.content}}</span>
+                  <span class="text-black-50 time">40 minutes ago</span>
+                </div>
+              </div>
+              <div class="feed-icon px-2"><i class="fa fa-ellipsis-v text-black-50"></i></div>
+            </div>
+          </div>
+          <div class="p-2 px-3"><span>{{post.content}}</span></div>
+          <div class="d-flex justify-content-end socials p-2 py-3">
+           <button mat-button color="primary"> <mat-icon matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+            thumb_up
+          </mat-icon></button>
+          <button mat-button color="primary"> <mat-icon > add_comment</mat-icon>
+          </button> 
+            <!-- <i class="fa fa-thumbs-up"></i><i
+              class="fa fa-comments-o"></i>
+              <i class="fa fa-share"></i> -->
+            </div>
+            <!-- Comment box started -->
+              
+              <div class="card py-3 p-4 border-0" style="background-color: #f8f9fa;">
+                 <!-- Comments list-->
+                <div class=" card-body d-flex flex-start mt-4">
+                  <a class="me-3" href="#">
+                    <img class="rounded-circle shadow-1-strong"
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
+                      width="65" height="65" />
+                  </a>
+                  <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">
+                          John Smith <span class="small">- 4 hours ago</span>
+                        </p>
+                      </div>
+                      <p class="small mb-0">
+                        the majority have suffered alteration in some form, by
+                        injected humour, or randomised words.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                 <!-- your Comment box started -->
+                <div class="d-flex flex-start w-100">
+                  <img class="rounded-circle shadow-1-strong me-3"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
+                    height="40" />
+                  <div class="form-outline w-100">
+                    <textarea class="form-control" id="textAreaExample" rows="4"
+                      style="background: #fff;"></textarea>
+                    <label class="form-label" for="textAreaExample">Message</label>
+                  </div>
+                </div>
+                 <!--Your Comment box buttons -->
+                <div class="float-end mt-2 pt-1">
+                  <button type="button" class="btn btn-primary btn-sm">Post comment</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+                </div>
+              </div>
+            
+            <!-- Comment box closed -->
+            
+           
+            <!-- <section style="background-color: #eee;">
+              <div class="container my-2 py-2">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-12 col-lg-10 col-xl-8">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex flex-start align-items-center">
+                          <img class="rounded-circle shadow-1-strong me-3"
+                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60"
+                            height="60" />
+                          <div>
+                            <h6 class="fw-bold text-primary mb-1">Lily Coleman</h6>
+                            <p class="text-muted small mb-0">
+                              Shared publicly - Jan 2020
+                            </p>
+                          </div>
+                        </div>
+            
+                        <p class="mt-3 mb-4 pb-2">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut aliquip consequat.
+                        </p>
+            
+                        <div class="small d-flex justify-content-start">
+                          <a href="#!" class="d-flex align-items-center me-3">
+                            <i class="far fa-thumbs-up me-2"></i>
+                            <p class="mb-0">Like</p>
+                          </a>
+                          <a href="#!" class="d-flex align-items-center me-3">
+                            <i class="far fa-comment-dots me-2"></i>
+                            <p class="mb-0">Comment</p>
+                          </a>
+                          <a href="#!" class="d-flex align-items-center me-3">
+                            <i class="fas fa-share me-2"></i>
+                            <p class="mb-0">Share</p>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                        <div class="d-flex flex-start w-100">
+                          <img class="rounded-circle shadow-1-strong me-3"
+                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
+                            height="40" />
+                          <div class="form-outline w-100">
+                            <textarea class="form-control" id="textAreaExample" rows="4"
+                              style="background: #fff;"></textarea>
+                            <label class="form-label" for="textAreaExample">Message</label>
+                          </div>
+                        </div>
+                        <div class="float-end mt-2 pt-1">
+                          <button type="button" class="btn btn-primary btn-sm">Post comment</button>
+                          <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section> -->
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
+            
+            
+        </div>
+        
+        <!-- <div class="bg-white border mt-2">
+          <div>
+            <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+              <div class="d-flex flex-row align-items-center feed-text px-2"><img class="rounded-circle"
+                  src="https://i.imgur.com/aoKusnD.jpg" width="45">
+                <div class="d-flex flex-column flex-wrap ml-2" style="padding-left: 10px;">
+                  <span class="font-weight-bold">Thomson ben</span><span
+                    class="text-black-50 time">40 minutes ago</span></div>
+              </div>
+              <div class="feed-icon px-2"><i class="fa fa-ellipsis-v text-black-50"></i></div>
+            </div>
+          </div>
+          <div class="feed-image p-2 px-3"><img class="img-fluid img-responsive" src="https://i.imgur.com/aoKusnD.jpg">
+          </div>
+          <div class="d-flex justify-content-end socials p-2 py-3"><i class="fa fa-thumbs-up"></i><i
+              class="fa fa-comments-o"></i><i class="fa fa-share"></i></div>
+        </div> -->
+      </div>
+      
+      <!-- Share -->
+      <div class="feed p-2">
 
-  p {
-    margin: 0;
-  }
+      </div>
 
-  .spacer {
-    flex: 1;
-  }
+    </div>
+    <!-- third section -->
+    <div class="col-3 border border-primary">
+      <!-- Edit Profile Section -->
+      <div class="edit-profile">
 
-
-/* imp */
-  .content {
-    background-color: aqua;
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: rgb(69, 69, 69)#888;
-  }
-
-  .card-container {
-    background-color: aquamarine  ;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  
-</style>
-
-<app-nav-bar [isLoggedIn] = "isLoggedIn"></app-nav-bar>
-
-<div id="jam-header" tabindex="-1">
-  <div id="jam-custom-header" class="clearfix">
-    <style>
-.jdch-header-container {
-border-top: 4px solid #e53626;
-border-bottom: 1px solid #d4d4d4;
-background: linear-gradient(#ffffff, #f0f0f0);
-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-}
-.jdch-header, .jdch-navbar {
-padding: 0 5px;
-margin: 0 auto;
-width: auto;
-display: flex;
-flex-wrap: wrap;
-}
-.jdch-header, .jdch-header * {
-box-sizing: border-box;
-}
-.jdch-menu {
-width: 8.33333%;
-}
-.jdch-menu, .jdch-profile-responsive, .jdch-search, .jdch-header-links {
-padding: 0 5px;
-}
-.jdch-company, .jdch-search {
-flex-grow: 1;
-}
-.jdch-menu, .jdch-company, .jdch-header-links {
-float: left;
-}
-.jdch-company {
-height: 45px;
-white-space: nowrap;
-}
-.jdch-company .jdch-company-logo {
-display: inline-block;
-vertical-align: top;
-margin: 7px 0;
-}
-.jdch-company .jdch-brand-text {
-margin-left: 15px;
-line-height: 45px;
-}
-.jdch-line-break {
-display: block;
-width: 100%;
-}
-.jdch-header-links {
-white-space: nowrap;
-max-width: 30%;
-}
-.jdch-header-links > ul > li {
-margin: 0 12px;
-position: relative;
-display: inline-block;
-vertical-align: middle;
-}
-.jdch-header-links > ul > li.jdch-divider {
-margin: 0 5px;
-}
-.jdch-divider > div {
-border-left: 1px solid #bfbfbf;
-line-height: 26px;
-width: 0;
-}
-.jdch-search .only-icon {
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: flex-end;
-}
-.jdch-navbar {
-justify-content: space-between;
-}
-.jdch-navbar .jdch-nav-items > * {
-margin: 0 8px;
-}
-@media (max-width: 1234px) {
-.jdch-header-links > ul > li {
-margin: 0 8px;
-}
-}
-@media (max-width: 991px) {
-.jdch-hidden-responsive,
-.jdch-divider {
-display: none !important; 
-}
-.jdch-search {
-width: 70%;
-}
-.jdch-header-links {
-line-height: 44px;
-}
-}
-@media (max-width: 320px) {
-.jdch-header-links > ul > li {
-margin: 0 5px;
-}
-}
-@media (min-width: 768px) {
-.jdch-header {
-width: 730px;
-}
-.jdch-menu {
-padding: 0 20px;
-}
-}
-@media (min-width: 992px) {
-.jdch-hidden-full {
-display: none !important; 
-}
-.jdch-header {
-flex-wrap: nowrap;
-width: 950px;
-}
-.jdch-company, .jdch-header-links {
-max-width: 25%;
-}
-.jdch-navbar {
-width: 965px;
-}
-}
-@media (min-width: 1235px) {
-.jdch-header {
-width: 1190px;
-}
-.jdch-navbar {
-width: 1205px;
-}
-.jdch-company, .jdch-header-links {
-width: 25%;
-}
-.jdch-navbar {
-width: 1205px;
-}
-}
-
-</style>
-<div class="jdch-header-container">
-<div class="jdch-header">
-<div class="jdch-menu jdch-hidden-full">
-<div id="jam-mobile-menu-link" class="jam-mobile-menu-link dropdown" role="navigation">
-<a id="jam-mobile-menu" class="dropdown-toggle jam-large-text body-text" data-bs-toggle="dropdown" aria-label="navigation">
-<span class="sap-icon icon-menu2 " ></span>
-</a>
-<ul class="dropdown-menu dropdown-menu-placeholder">
-</ul>
-</div>
-</div>
-<div class="jdch-company" role="banner">
-  <a href="/">
-    <span class="jdch-company-logo"><div id="company-logo-branding"><img src="/image/logo/IoQY4lg7ugxnfr8AP9qc8f?is_area_logo=false&amp;max_x=180&amp;max_y=50&amp;ts=1584204871" alt="vSocialize logo" title="vSocialize logo" class="picFloat" srcset="/image/logo/IoQY4lg7ugxnfr8AP9qc8f?is_area_logo=false&amp;max_x=360&amp;max_y=100&amp;ts=1584204871 2x"></div>
-</span>
-  </a>
-  <span class="jdch-brand-text"><div class="jam-instance-name-container">
-  <a id="module-nav-active" class="module-nav-active jam-brand-text" title="vSocialize" href="javascript:void(0)" data-bs-toggle="dropdown">
-    <span class="jam-instance-name" >vSocialize</span>
-  </a>
-  <ul id="module-nav-list" class="dropdown-menu">
-    <li class="first last"><a popup="false" href="https://performancemanager10.successfactors.com/sf/home?company=yashtechnoP&amp;username=tanay.ojha">SuccessFactors Home</a></li>
-  </ul>
-</div>
-</span>
-</div>
-<div class="jdch-profile-responsive jdch-hidden-full">
-<style>
-#jam-header img.jam-header-avatar.custom-header-profile-radius {
-border-radius: 1px;
-}
-</style>
-
-<ul>
-<li class="jam-header-link jam-header-user-link jam-profile-popover-trigger no-margin" data-hc-position="fixed" data-bs-original-title="" title="">
-  <a title="View Profile" class="avatar-anchor"><img src="/images/personShadow32x32.png" class="jam-header-avatar custom-header-profile-radius " alt="Tanay Ojha" title="Tanay Ojha" max_x="32" max_y="32" data-member-param="KHwY0HTJS7rZnKZquOZueW" data-member-can-see-presence="true"><span class="presence-avatar-indicator small-indicator indicator-offline" data-bs-original-title="Offline" style="width: 6.4px; height: 6.4px; font-size: 6.4px; line-height: 6.4px;"></span></a>
-</li>
-</ul>
-
-
-</div>
-<div class="jdch-line-break jdch-hidden-full"></div>
-<div class="jdch-search">
-
-
-  <style>
-    #jam-header .surprise-box .surprise-me:hover {
-      color:  yellow;
-    }
-  </style>
-  
-    
-<div class="dropdown surprise-box">
-<div class="filter dropdown-toggle" data-bs-toggle="dropdown">
-<div class="search_filter_text">All</div>
-<span class="caret"></span>
-</div>
-<ul class="dropdown-menu">
-<li><a href="#" class="dropdown-item a all" data-filter="all">All</a></li>
-<li><a href="#" class="dropdown-item c content" data-filter="content">Content</a></li>
-  <li><a href="#" class="dropdown-item e event events" data-filter="events">Events</a></li>
-<li><a href="#" class="dropdown-item f forum forums" data-filter="forums">Forums</a></li>
-<li><a href="#" class="dropdown-item g group groups" data-filter="groups">Groups</a></li>
-  <li><a href="#" class="dropdown-item m message messages" data-filter="messages">Messages</a></li>
-<li><a href="#" class="dropdown-item p people" data-filter="people">People</a></li>
-  <li><a href="#" class="dropdown-item t task tasks" data-filter="tasks">Tasks</a></li>
-<li><a href="#" class="dropdown-item tag tags" data-filter="tags">Tags</a></li>
-</ul>
-<div class="suggestion-container"><input class="term-box" type="text" name="name" value="" placeholder="Search for people, groups, documents and more..." autocomplete="off" aria-label="Search for people, groups, documents and more..."><div class="suggestion" tabindex="-1" style="display: none;"></div></div>
-<a aria-hidden="true" tabindex="-1" href="#" data-type="search" class="surprise-me sap-icon icon-search" style="">&nbsp;</a>
-</div>
-
-
-</div>
-<div class="jdch-header-links">
-  <ul role="navigation">
-    <li class="jdch-hidden-responsive">
-<style>
-#jam-header img.jam-header-avatar.custom-header-profile-radius {
-border-radius: 1px;
-}
-</style>
-
-<ul>
-<li class="jam-header-link jam-header-user-link jam-profile-popover-trigger no-margin" data-hc-position="fixed" data-bs-original-title="" title="">
-  <a title="View Profile" class="avatar-anchor"><img src="/images/personShadow32x32.png" class="jam-header-avatar custom-header-profile-radius " alt="Tanay Ojha" title="Tanay Ojha" max_x="32" max_y="32" data-member-param="KHwY0HTJS7rZnKZquOZueW" data-member-can-see-presence="true"><span class="presence-avatar-indicator small-indicator indicator-offline" data-bs-original-title="Offline" style="width: 6.4px; height: 6.4px; font-size: 6.4px; line-height: 6.4px;"></span></a>
-</li>
-</ul>
-
-
-</li>
-    <li>
-<ul>
-
-<li id="current-user-task-count" class="jam-header-link no-margin">
-<a title="0 overdue tasks" aria-label="Tasks" href="/tasks?filter=all">
-  <span class="sap-icon icon-task " style="" tabindex="-1"></span>
-  <style>
-    #jam-header span.icon-task:hover {
-      color:  yellowgreen;
-    }
-  </style>
-  <span id="current-user-task-count-content" class="jam-header-badge">
-    <span id="current-user-task-count-content-link" class="current-user-overdue-task-counter" data-unread-count="">0</span>
-  </span>
-</a>  </li>
-</ul>
-</li>
-    <li>
-<ul>
-<li id="current-user-notification-count" class="jam-header-link no-margin" data-hc-position="fixed" data-bs-original-title="" title="">
-<span id="current-user-notification-count-bell" class="jam-header-link-icon sap-icon icon-bell " aria-hidden="true" title="0 unread notifications" style=""></span>
-<style>
-  #current-user-notification-count-bell.icon-bell:hover {
-    color:  yellow;
-  }
-</style>
-<span id="current-user-notification-count-content" class="jam-header-badge">
-  <span id="current-user-notification-count-content-link" data-unread-count="">0</span>
-</span>
-<a style="display: none;" class="jam-header-link-icon sap-icon icon-bell notifications-link" href="/inbox/view" tabindex="0" aria-label="Notifications" title="0 unread notifications"></a>
-</li>
-</ul>
-
-<script>
-//<![CDATA[
-
-jamApp.asyncLoadPackage('popover').then(function(requiredModule) {
-requiredModule.InboxPopover.bindNotificationBellEvent('#current-user-notification-count');
-});
-
-//]]>
-</script>
-</li>
-    <li>
-<ul>
-<li id="current-user-message-count" class="jam-header-link no-margin" tabindex="0" data-bs-original-title="" title="">
-<span class="sap-icon jam-icon-conversations "  title="0 unread messages"></span>
-<style>
-  #jam-header span.jam-icon-conversations:hover {
-    color:  yellow;
-  }
-</style>
-  <span id="current-user-message-count-content" class="jam-header-badge">
-    <span id="current-user-message-count-content-link">0</span>
-  </span>
-</li>
-</ul>
-
-<script>
-//<![CDATA[
-
-if (jamApp.betas.messages_preview_bb5_1902) {
-$(document).ready(function() {
-  jamApp.asyncLoadPackage('popover').then(function(requiredModule) {
-    new requiredModule.MessagesPopover({
-      clickTarget: $('#current-user-message-count')
-    }).render();
-  });
-});
-}
-
-//]]>
-</script>
-</li>
-    <li class="jdch-divider"><div> </div></li>
-    <li class="jdch-hidden-responsive">
-<ul>
-<li class="jam-header-link jam-header-user-actions dropdown no-margin" id="header-settings">
-<div id="jam-ac-settings" class="dropdown-toggle" tabindex="-1" data-bs-toggle="dropdown" aria-label="Settings">
-  <span class="sap-icon icon-action-settings " tabindex="0" title="Account Settings" style=""></span>
-  <style>
-    #jam-header span.icon-action-settings:hover {
-      color:  yellowgreen;
-    }
-  </style>
-</div>
-<ul class="dropdown-menu pull-right">
-    <li class="first">
-    <a class="dropdown-item" href="/profile/settings">Account Settings</a>
-    </li>
-  <li class="last"><a class="dropdown-item" rel="nofollow" data-method="post" href="/auth/logout">Log out</a></li>
-</ul>
-</li>
-</ul>
-</li>
-    <li class="jdch-hidden-responsive">
-<script>
-//<![CDATA[
-
-jQuery(document).ready(function() {
-$('.invoke-quick-tour').on('click', function() {
-  jamApp.asyncLoadDialog('getting_started').then(function(requiredModule) {
-    new requiredModule.WelcomeWizardView({fromPath: window.location.pathname + window.location.search}).render();
-  });
-});
-});
-
-//]]>
-</script><style>
-#jam-header span.icon-sys-help:hover {
-color:  yellowgreen;
-}
-</style>
-<ul>
-<li class="dropdown jam-header-link no-margin" id="jam-help-link-container">
-  <a href="javascript:void(0);" class="dropdown-toggle" data-bs-toggle="dropdown" tabindex="-1">
-    <span class="sap-icon icon-sys-help" data-help-id="icon-help" tabindex="0" title="Help" style=""></span>
-  </a>
-  <ul class="dropdown-menu pull-right">
-    <li>
-      <a target="_blank" title="Help" aria-label="Help" id="enable-help-toggle" class="dropdown-item" href="https://you.yash.com/Pages/default.aspx">
-        Help Page
-</a>        </li>
-    <li class="getting-started-wizard-dropdown dropdown" id="jam-help-link">
-      <a class="dropdown-item invoke-quick-tour" href="javascript:void(0)">Quick Tour</a>
-    </li>
-    <li>
-      <a class="dropdown-item disabled" id="enable-now-toggle">Feature Tours</a>
-    </li>
-  </ul>
-</li>
-</ul>
-</li>
-  </ul>
-</div>
-</div>
-</div>
-<div id="jam-navbar" class="" role="navigation" aria-label="Main navbar">
-<div class="clearfix">
-  
-<div class="jdch-navbar jdch-hidden-responsive">
-<span class="jdch-nav-items">
-  <span class="navbar-home jam-navbar-tab selected"><a href="/home"><span>Home</span></a></span>
-
-  <span class="navbar-groups groups jam-navbar-tab dropdown_nav dropdown" data-ac="hover-menu" data-focus-target=".dropdown_nav.groups"><a href="/groups/dashboard"><span>Groups<b class="caret"></b></span></a>
-
-
-
-<ul class="dropdown-menu">
-<li class="favorite-groups-header disabled noDisplay">
-  <a class="dropdown-item">
-    Favorites
-  </a>
-</li>
-<li class="nav-dropdown-item dropdown-divider recently noDisplay"></li>
-<li class="recently-groups-header disabled noDisplay">
-  <a class="dropdown-item">
-    Recently Visited
-  </a>
-</li>
-<li class="nav-dropdown-item"><a class="dropdown-item" href="/groups/dashboard">View All Groups</a></li>
-</ul>
-
-</span>
-  
-  
-</span>
-<span class="jdch-nav-items">
-  <span class="navbar-recommend jam-navbar-tab">
-<a href="/recommendations/most_viewed">Recommendations</a>
-</span>
-    <span class="navbar-bookmarks jam-navbar-tab">
-<a href="/feed/bookmarks">Bookmarks</a>
-</span>
-    <span class="navbar-events jam-navbar-tab"><a href="/calendar"><span>Calendar</span></a></span>
-
-</span>
-</div>
-
-</div>
-</div>
-
-
-
+      </div>
+    </div>
   </div>
 </div>
 
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  
-</div>
 
-<div class="content" role="main">  
+<!-- Next Steps -->
+<!-- <h2>Next Steps</h2>
+  <p>What do you want to do next with your app?</p> -->
 
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  
-
-</div>
-
-
-
+<!-- Resources -->
+<!-- <h2>Resources</h2>
+  <p>Here are some links to help you get started:</p> -->

@@ -1,0 +1,37 @@
+body{background-color:#eee}.time{font-size: 9px !important}
+.socials i{margin-right: 14px;font-size: 17px;color: #d2c8c8;cursor: pointer}
+.feed-image img{width: 100%;height: auto}
+
+.user_image {
+    margin-top: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: lightgrey; 
+    /*for demo*/
+    display:inline-block;
+    vertical-align:middle;
+  }
+  .circular_image img{
+    width:100%;
+  }
+
+  .shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+    width: 500px;
+    border-radius: 0px;
+
+}
+
+.btn {
+  color: #FFFFFF;
+  background-color: #673ab7;
+  height: 28px;
+  font-size: 11px;
+  text-align: center;
+  }
+

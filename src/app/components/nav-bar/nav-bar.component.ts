@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,28 +14,25 @@ export class NavBarComponent implements OnInit {
 
   @Input()
   isLoggedIn: boolean = false;
-  user = null;
 
   constructor(
     private loginService: LoginService,     
     private router: Router
     ) { }
 
+   loginStatus$ : Observable<boolean> | undefined;
+  user = null;
+
   ngOnInit(): void {
-    //this.isLoggedIn = this.loginService.isLoggedIn();
+    //this.loginStatus$ = this.loginService.loggedIn
     console.log('nav-bar-compo.ts->');
     console.log(this.isLoggedIn );
     this.user = this.loginService.getUser();
-    //if()
+    
   }
 
   public logout(){
-      this.isLoggedIn = false;
       this.loginService.logout();
-      console.log(this.isLoggedIn );
-
-      this.router.navigate(['/login'], { queryParams: { registered: 'false' } });
-
   }
 
 }

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
+   
     private snackBar: MatSnackBar, 
     private loginService: LoginService,
     private route: ActivatedRoute,
@@ -70,9 +71,9 @@ export class LoginComponent implements OnInit {
           //
           this.loginService.getCurrentUser().subscribe(
             (user : any) => {
-              this.loginService.setUser(user);
-              console.log(user);
-              
+              this.loginService.setUser(JSON.stringify({User : user} ));
+              console.error(user);
+              localStorage.setItem("user_id",user.id);
             }
           );
 
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
             icon: 'success',
             title: 'Login Successfully!',
             showConfirmButton: false,
-            timer: 600,
+            timer: 2000,
           })
 
 

@@ -13,6 +13,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -42,9 +44,10 @@ import { authInterceptorProviders } from './services/auth.interceptor';
     MatCardModule,
     MatInputModule,
     MatIconModule,
+    MatBadgeModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,   
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
