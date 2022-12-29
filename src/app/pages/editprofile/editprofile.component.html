@@ -1,0 +1,123 @@
+<!-- rest of the html code goes here -->
+<app-nav-bar [isLoggedIn]="isLoggedIn"></app-nav-bar>
+<div class="container p-2">
+    <div class="row">
+        <div class="col-3 border border-white">
+            <!-- Left Section -->
+            <div class="edit-profile">
+                <div class="feed p-2">
+                    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+                        <div class="feed-text p-2">
+                            <div class="profile-image">
+                                <img class="center" src='{{user.profile}}' alt="no image found" width="210px"
+                                    height="210px">
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <div><b>Designation:</b> Software Engineer</div>
+                            </div>
+                            <div class="full_name" style="color: #673ab7; margin-top: 5px;"><b>Followers</b> {{user.followerCount}}
+                            </div>
+                            <span></span>
+                            <div class="full_name" style="color: #673ab7; margin-top: 5px;"><b>Following</b> {{user.followingCount}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Section -->
+        <div class="col-md-9 border border-white">
+            <div class="feed p-2">
+                <h2>Edit Profile</h2>
+                <!-- Basic Profile Information Box-->
+                <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white border">
+                    <div class="feed-text px-2">
+                        Basic Profile Information
+                    </div>
+                </div>
+                <div class="bg-white border mt-2">
+                    <div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-2">
+                            <div>
+                                <!-- <div><b>First Name:</b></div> -->
+                                <div>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>First Name:</mat-label>
+                                        <input matInput required 
+                                        pattern="[a-zA-Z][a-zA-Z ]+"
+                                         [(ngModel)]="user.firstName"/>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Last Name:</mat-label>
+                                        <input matInput required 
+                                        pattern="[a-zA-Z][a-zA-Z ]+" 
+                                         [(ngModel)]="user.lastName"/>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Mobile:</mat-label>
+                                        <input matInput  [(ngModel)]="user.mobile"/>
+                                    </mat-form-field>
+                                </div>
+                               <div>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Password:</mat-label>
+                                    <input matInput [(ngModel)]="user.password" [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                               </div>
+                                <button mat-raised-button color="primary" type="submit" (click)="updateUserInfo()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-2">
+                            <div><b>Last Name:</b> {{user.lastName}}</div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="bg-white border mt-2">
+                    <!-- Basic Profile Information Box-->
+                    <div class="d-flex flex-row justify-content-between align-items-center p-2">
+                        <div class="feed-text px-2">
+                            Contact Information
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border mt-2">
+                    <div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-2">
+                            <div>
+                                <div><b>Email Address:</b> {{user.username}}</div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <!-- <mat-form-field appearance="fill">
+                                <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field> -->
+                        </div>
+                        <!-- <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+                            <div><b>Mobile:</b> {{user.mobile}}</div>
+                        </div> -->
+                    </div>
+                    <!-- <div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+                            <div>Designation: Software Engineer</div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>

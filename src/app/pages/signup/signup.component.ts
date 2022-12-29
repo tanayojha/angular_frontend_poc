@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AbstractControl, ValidationErrors, ValidatorFn }
   from '@angular/forms';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +19,7 @@ export class SignupComponent implements OnInit {
   emailTest: any;
   toastr: any;
   isLoggedIn = false;
+  
 
   constructor(
     private userService: UserService,
@@ -30,7 +32,7 @@ export class SignupComponent implements OnInit {
     lastName: '',
     username: '',
     password: '',
-    mobile: ''
+    mobile:''
   }
 
   ngOnInit(): void {
@@ -110,6 +112,7 @@ export class SignupComponent implements OnInit {
       this.userService.addUser(this.user).subscribe(
         (data) => {
           //success
+          
           console.log(data);
 
           //alert('success');

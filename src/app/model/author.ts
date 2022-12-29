@@ -1,4 +1,4 @@
-export class User {
+export class Author {
    id:number=0;
    username :string = "";
    firstName :string = "";
@@ -17,6 +17,4 @@ export class User {
    followerUsers : any[] = [];
    followingUsers: any[] = [];
    userRoles: any[] = [];
-   authorities : any[]=[];
-   follow_status: number = 0;
 }

@@ -28,25 +28,19 @@
                             <!-- First Name -->
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>First Name</mat-label>
-                                <input
-                                    required 
-                                    pattern="[a-zA-Z][a-zA-Z ]+"
-                                    [(ngModel)]="user.firstName" name="firstName" matInput
-                                    placeholder="Enter First Name">
-                                    
-                                 <mat-hint>eg: Yash</mat-hint>
+                                <input required pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="user.firstName"
+                                    name="firstName" matInput placeholder="Enter First Name">
+
+                                <mat-hint>eg: Yash</mat-hint>
                             </mat-form-field>
                         </p>
                         <p class="text-center" style="margin-top: 10px;">
                             <!-- Last Name -->
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Last Name</mat-label>
-                                <input
-                                    required 
-                                    pattern="[a-zA-Z][a-zA-Z ]+" 
-                                    [(ngModel)]="user.lastName" name="lastName" matInput
-                                    placeholder="Enter Last Name">
-                                
+                                <input required pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="user.lastName" name="lastName"
+                                    matInput placeholder="Enter Last Name">
+
                                 <mat-hint>eg: Technologies</mat-hint>
                             </mat-form-field>
                         </p>
@@ -63,15 +57,12 @@
                             <!-- Password -->
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Password</mat-label>
-                                <input 
-                                required
-                                minlength="6"
-                                maxlength="12"
-                                 [(ngModel)]="user.password" name="password" matInput
-                                    [type]="showPassword ? 'text' : 'password'" name="password">
+                                <input required minlength="6" maxlength="12" [(ngModel)]="user.password" name="password"
+                                    matInput [type]="showPassword ? 'text' : 'password'" name="password">
                                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
                                     {{showPassword?'visibility_off':'visibility'}}</mat-icon>
-                                <mat-hint>Password Must Be In 6-12 Digits Contains Atleast One Uppercase, One Lowercase, And Numbers(0-9),
+                                <mat-hint>Password Must Be In 6-12 Digits Contains Atleast One Uppercase, One Lowercase,
+                                    And Numbers(0-9),
                                     One Specail Characters(*$#@!_-)</mat-hint>
                             </mat-form-field>
                         </p>
@@ -79,9 +70,8 @@
                             <!-- Mobile -->
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Mobile</mat-label>
-                                <input required [(ngModel)]="user.mobile" 
-                                name="mobile" 
-                                matInput placeholder="Enter mobile number">
+                                <input required [(ngModel)]="user.mobile" name="mobile" matInput
+                                    placeholder="Enter mobile number">
                                 <mat-hint>Please Enter 10 Digit Mobile Number.
                                     eg: 9876543210 </mat-hint>
                             </mat-form-field>
@@ -90,6 +80,9 @@
                         <!-- Register Button -->
                         <button style="margin-top: 10px;" mat-raised-button class="full-width" type="submit"
                             color="primary">Register</button>
+                        <!-- Reset Button -->
+                        <button style="margin-top: 10px;" mat-raised-button class="full-width" type="reset"
+                            color="warn">Reset</button>
 
                         <p style="margin-bottom: 20px;"> </p>
 

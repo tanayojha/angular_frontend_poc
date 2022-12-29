@@ -1,7 +1,7 @@
 <!-- Toolbar -->
 
 <!-- <span *ngIf="infoMessage.length > 0">{{ infoMessage }}</span> -->
-<app-nav-bar [isLoggedIn] = "isLoggedIn"></app-nav-bar>
+<app-nav-bar [isLoggedIn]="isLoggedIn"></app-nav-bar>
 
 <div class="bootstrap-wrapper">
     <div class="container" style="margin-top: 20px;">
@@ -41,9 +41,7 @@
                             <!-- Password -->
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Password</mat-label>
-                                <input required 
-                                [(ngModel)]="loginData.password" name="password" 
-                                matInput
+                                <input required [(ngModel)]="loginData.password" name="password" matInput
                                     [type]="showPassword ? 'text' : 'password'" name="password"
                                     placeholder="Enter Password">
                                 <mat-icon matSuffix (click)="togglePasswordVisibility()">
@@ -53,8 +51,9 @@
                         </p>
 
                         <!-- Register Button -->
-                        <button  mat-raised-button class="full-width" type="submit"
-                            color="primary">Login</button>
+                        <button mat-raised-button class="full-width" type="submit" color="primary">Login</button>
+
+                        <p align="right" style="margin-top: 15px;">Forgot Password? <span style="color: #673ab7;">Click Here</span></p>
 
                         <p style="margin-bottom: 20px;"></p>
 

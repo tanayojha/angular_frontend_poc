@@ -28,7 +28,6 @@ export class NavBarComponent implements OnInit {
     console.log('nav-bar-compo.ts->');
     console.log(this.isLoggedIn );
     this.user = this.loginService.getUser();
-    
   }
 
   public logout(){

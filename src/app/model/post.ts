@@ -1,3 +1,5 @@
+import { Author } from "./author";
+import { Comment } from "./comment";
 import { User } from "./user";
 
 export class Post {
@@ -8,7 +10,9 @@ export class Post {
    commentCount: number = 0;
    shareCount: number = 0;
    isTypeShare: boolean = true;
+   isLiked:boolean = false;
    dateCreated: Date = new Date();
    dateLastModified: Date = new Date();
-   author:User=new User();
+   author:Author=new Author();
+   postComments!:Comment[];
 }

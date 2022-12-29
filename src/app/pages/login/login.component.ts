@@ -58,34 +58,30 @@ export class LoginComponent implements OnInit {
       //alert('password is required!');
       return;
     }
-    
-
     this.loginService.genearteToken(this.loginData).subscribe(
       (data: any)=> {
           console.log('Login sucess-->');
           console.log(data);
-
           //
-          this.loginService.loggedInUser(data.token);
-          
+          this.loginService.setJwtToken(data.token);
           //
           this.loginService.getCurrentUser().subscribe(
             (user : any) => {
               this.loginService.setUser(JSON.stringify({User : user} ));
-              console.error(user);
-              localStorage.setItem("user_id",user.id);
+              console.log(user);
+              //localStorage.setItem("user_id",user.id);
             }
           );
-
            //alert('success');
-           
-           Swal.fire({
-            icon: 'success',
-            title: 'Login Successfully!',
-            showConfirmButton: false,
-            timer: 2000,
-          })
-
+          //  Swal.fire({
+          //   icon: 'success',
+          //   title: 'Login Successfully!',
+          //   showConfirmButton: false,
+          //   timer: 2000,
+          // })
+          this.snackBar.open('Password Required!', '', {
+            duration: 1000
+          });
 
         this.router.navigate(['/home'], { queryParams: { registered: 'true' } });
 

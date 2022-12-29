@@ -8,84 +8,83 @@ import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 })
 export class LoginService {
 
+  token: string = '';
+
   constructor(private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: StorageService) { }
 
-  //get Current User which is logged in
-  public getCurrentUser(){
+  //genrate token
+  public genearteToken(loginData: any) {
+    return this.http.post(`${baseURL}/generate-token`, loginData);
+  }
+
+  //Login API
+  public getCurrentUser() {
     return this.http.get(`${baseURL}/current-user`);
   }
 
-  setJwtToken(token: string) {
+  //Set JWT Token
+  public setJwtToken(token: string) {
     this.storage.set("token", token);
-    console.log(token);
-    
+    console.log('setJwtToken()-> ', token);
+    this.token = token;
   }
 
-  getJwtToken() {
+  //Get JWT Token
+  public getJwtToken() {
+    console.log('getJwtToken()-> ', this.token);
     return this.storage.get("token");
-    
   }
 
-  //genrate token
-  public genearteToken(loginData: any){
-      return this.http.post(`${baseURL}/generate-token`,loginData);
+  public loginUser(token: string) {
+    localStorage.setItem("token", token);
+    return true;
   }
 
-  //set token in local storgae for logged in user
-  public loggedInUser(token: any){
-    console.log("insided  loggedInUser",token);
-    this.storage.set;
-      //localStorage.setItem('token',token);
-      console.log("insided  loggedInUser",localStorage.getItem('token'));
+  //isLogin: user is logged in or not
+  public isLoggedIn() {
 
+    let token = localStorage.getItem("token")
+    if (token == undefined || token == '' || token == null) {
+      return false;
+    } else {
       return true;
+    }
   }
 
-  //check user is Login in or not
-  public isLoggedIn(){
-      let geneartedToken = localStorage.getItem("token");
-      console.log("insided  isloggedin",geneartedToken);
-      
-      if(geneartedToken==undefined || geneartedToken=='' || geneartedToken== null){
-          return false;
-      }else{
-        return true;
-      }
-  }
-
-  //logout : remove token from local storage
-  public logout(){
-      // localStorage.setItem('token',''); 
-      localStorage.removeItem('user');
-      return true;
+ //logout : remove token from local storage
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    return true;
   }
 
   //get token
-  public getToken(){
+  public getToken() {
+    console.log(localStorage.getItem('token'))
     return localStorage.getItem('token');
   }
 
   //set userDetails
-  public setUser(user : string){
-    console.log("inside setuser"+user);
+  public setUser(user: string) {
     localStorage.setItem('user', user);
   }
 
-  //get user
-  public getUser(){
-    let user = localStorage.getItem('user');
-    if(user != null){
-        return JSON.parse(user);
+  public getUser() {
+    let usrStr = localStorage.getItem("user");
+    console.log(usrStr + "user")
+    if (usrStr != null) {
+     console.log("GETUSER"+JSON.parse(usrStr|| '{}').User);
+      return JSON.parse(usrStr|| '{}').User;
     }
-    else{
+    else {
       this.logout();
       return null;
     }
   }
 
   //get User Role
-  public getUserRole(){
+  public getUserRole() {
     let user = this.getUser();
     return user.authorities[0].authority;
   }
